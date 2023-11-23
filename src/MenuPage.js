@@ -107,12 +107,17 @@ const MenuPage = ({
       console.log("JSON 주문 정보:", jsonOrderInfo);
 
       // 백엔드로 POST 요청 보내기
-      const response = await axios.post("/api/menu", jsonOrderInfo, {
-        headers: {
-          "Content-Type": "application/json",
-          // 다른 필요한 헤더가 있다면 추가하세요
-        },
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/menu`,
+        jsonOrderInfo,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            // 다른 필요한 헤더가 있다면 추가하세요
+          },
+        }
+      );
 
       // 요청이 성공했는지 확인 (상태 코드가 2xx인지)
       if (response.status >= 200 && response.status < 300) {
